@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";  // Import bcryptjs for password hashing
 import { connectDB } from "../lib/db.js";
 import User from "../models/user.model.js";
 
-config();
+config();  // Load environment variables
 
 // Sample users for seeding the database
 const seedUsers = [
@@ -20,26 +20,31 @@ const seedUsers = [
     password: "123456",  // This will be hashed
     profilePic: "https://randomuser.me/api/portraits/women/2.jpg",
   },
-  // Add the remaining users...
+  // Add more users as needed...
 ];
 
 const seedDatabase = async () => {
   try {
-    await connectDB();  // Ensure your connectDB function is correctly set up
+    // Connect to the database
+    await connectDB();
 
-    // Hash passwords before inserting into database
-    const usersWithHashedPasswords = await Promise.all(seedUsers.map(async (user) => {
-      const hashedPassword = await bcrypt.hash(user.password, 10);  // Hash the password with a salt rounds of 10
-      return { ...user, password: hashedPassword };
-    }));
+    // Hash passwords before inserting into the database
+    const usersWithHashedPasswords = await Promise.all(
+      seedUsers.map(async (user) => {
+        const hashedPassword = await bcrypt.hash(user.password, 10);  // Hash the password with 10 salt rounds
+        return { ...user, password: hashedPassword };
+      })
+    );
 
-    // Insert users with hashed passwords
-    await User.insertMany(usersWithHashedPasswords);
-    console.log("Database seeded successfully");
+    // Insert users with hashed passwords into the database
+    const insertedUsers = await User.insertMany(usersWithHashedPasswords);
+
+    // Log success message with inserted user count
+    console.log(`Successfully seeded ${insertedUsers.length} users`);
   } catch (error) {
-    console.error("Error seeding database:", error);
+    console.error("Error seeding the database:", error.message || error);
   }
 };
 
-// Call the function
+// Call the function to seed the database
 seedDatabase();

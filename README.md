@@ -1,1 +1,1 @@
-ALX MERN Stack Chat app
+GOMO-CHAT

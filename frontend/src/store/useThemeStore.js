@@ -1,18 +1,25 @@
 import { create } from "zustand";
 
-const validThemes = ["coffee", "dark", "light"]; // Define valid themes
-
+/**
+ * Zustand store for managing the application's theme.
+ * 
+ * The theme is persisted in the browser's localStorage to retain the user's preference across sessions.
+ * If no theme is stored, the default theme "Nord" is used.
+ */
 export const useThemeStore = create((set) => ({
-  theme: (() => {
-    const savedTheme = localStorage.getItem("chat-theme");
-    return validThemes.includes(savedTheme) ? savedTheme : "coffee"; // Fallback to "coffee" if invalid theme is stored
-  })(),
+  /**
+   * Current theme of the application.
+   * Retrieved from localStorage or defaults to "Nord" if not set.
+   */
+  theme: localStorage.getItem("chat-theme") || "Nord",
+
+  /**
+   * Updates the theme both in the Zustand store and localStorage.
+   *
+   * @param {string} theme - The new theme to set. It should match the application's valid themes.
+   */
   setTheme: (theme) => {
-    if (validThemes.includes(theme)) {
-      localStorage.setItem("chat-theme", theme);
-      set({ theme });
-    } else {
-      console.warn(`Invalid theme: ${theme}. Valid themes are: ${validThemes.join(", ")}`);
-    }
+    localStorage.setItem("chat-theme", theme);
+    set({ theme });
   },
 }));

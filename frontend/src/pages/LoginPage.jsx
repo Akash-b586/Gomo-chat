@@ -2,16 +2,32 @@ import { useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import AuthImagePattern from "../components/AuthImagePattern";
 import { Link } from "react-router-dom";
-import { Eye, EyeOff, Loader2, Lock, Mail, MessageSquare } from "lucide-react";
+import { Eye, EyeOff, Loader2, Lock, Mail, MSquareIcon } from "lucide-react";
 
+/**
+ * LoginPage Component
+ * 
+ * Handles user authentication through email/password input. Integrates with
+ * the application's auth store for login functionality and state management.
+ * Features password visibility toggle and loading state during authentication.
+ */
 const LoginPage = () => {
+  // State management for password visibility toggle
   const [showPassword, setShowPassword] = useState(false);
+  
+  // Form state containing user credentials
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  // Authentication store methods and state
   const { login, isLoggingIn } = useAuthStore();
 
+  /**
+   * Handles form submission for login attempts
+   * @param {React.FormEvent} e - Form submission event
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     login(formData);
@@ -19,25 +35,25 @@ const LoginPage = () => {
 
   return (
     <div className="h-screen grid lg:grid-cols-2">
-      {/* Left Side - Form */}
+      {/* Authentication Form Section */}
       <div className="flex flex-col justify-center items-center p-6 sm:p-12">
         <div className="w-full max-w-md space-y-8">
-          {/* Logo */}
+          
+          {/* Branding Header */}
           <div className="text-center mb-8">
             <div className="flex flex-col items-center gap-2 group">
-              <div
-                className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20
-              transition-colors"
-              >
-                <MessageSquare className="w-6 h-6 text-primary" />
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                <MSquareIcon className="w-6 h-6 text-primary" />
               </div>
               <h1 className="text-2xl font-bold mt-2">Welcome Back</h1>
               <p className="text-base-content/60">Sign in to your account</p>
             </div>
           </div>
 
-          {/* Form */}
+          {/* Login Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
+            
+            {/* Email Input Field */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text font-medium">Email</span>
@@ -56,6 +72,7 @@ const LoginPage = () => {
               </div>
             </div>
 
+            {/* Password Input Field with Visibility Toggle */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text font-medium">Password</span>
@@ -71,6 +88,7 @@ const LoginPage = () => {
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 />
+                {/* Password Visibility Toggle Button */}
                 <button
                   type="button"
                   className="absolute inset-y-0 right-0 pr-3 flex items-center"
@@ -85,6 +103,7 @@ const LoginPage = () => {
               </div>
             </div>
 
+            {/* Submit Button with Loading State */}
             <button type="submit" className="btn btn-primary w-full" disabled={isLoggingIn}>
               {isLoggingIn ? (
                 <>
@@ -97,6 +116,7 @@ const LoginPage = () => {
             </button>
           </form>
 
+          {/* Registration Prompt */}
           <div className="text-center">
             <p className="text-base-content/60">
               Don&apos;t have an account?{" "}
@@ -108,7 +128,7 @@ const LoginPage = () => {
         </div>
       </div>
 
-      {/* Right Side - Image/Pattern */}
+      {/* Decorative Image Section */}
       <AuthImagePattern
         title={"Welcome back!"}
         subtitle={"Sign in to continue your conversations and catch up with your messages."}
@@ -116,4 +136,5 @@ const LoginPage = () => {
     </div>
   );
 };
+
 export default LoginPage;

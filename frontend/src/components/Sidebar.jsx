@@ -4,30 +4,52 @@ import { useAuthStore } from "../store/useAuthStore";
 import SidebarSkeleton from "./skeletons/SidebarSkeleton";
 import { Users } from "lucide-react";
 
+/**
+ * Sidebar Component
+ *
+ * This component displays a list of users for chat selection.
+ * Users can be filtered to show only online users.
+ *
+ * Features:
+ * - Fetches and displays the list of users.
+ * - Allows selecting a user to start a chat.
+ * - Provides a toggle to filter only online users.
+ * - Shows a loading skeleton while users are being fetched.
+ * - Displays online status indicators.
+ *
+ * Usage:
+ * - Displayed on the left side of the chat interface.
+ * - Users are fetched from `useChatStore()`, and online users from `useAuthStore()`.
+ */
 const Sidebar = () => {
   const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading } = useChatStore();
-
   const { onlineUsers } = useAuthStore();
   const [showOnlineOnly, setShowOnlineOnly] = useState(false);
 
+  // Fetch users when component mounts
   useEffect(() => {
     getUsers();
   }, [getUsers]);
 
+  // Filter users based on online status
   const filteredUsers = showOnlineOnly
     ? users.filter((user) => onlineUsers.includes(user._id))
     : users;
 
+  // Show loading skeleton while users are being fetched
   if (isUsersLoading) return <SidebarSkeleton />;
 
   return (
     <aside className="h-full w-20 lg:w-72 border-r border-base-300 flex flex-col transition-all duration-200">
+      {/* Sidebar Header */}
       <div className="border-b border-base-300 w-full p-5">
         <div className="flex items-center gap-2">
           <Users className="size-6" />
+          
           <span className="font-medium hidden lg:block">Contacts</span>
         </div>
-        {/* TODO: Online filter toggle */}
+
+        {/* Online Filter Toggle */}
         <div className="mt-3 hidden lg:flex items-center gap-2">
           <label className="cursor-pointer flex items-center gap-2">
             <input
@@ -42,6 +64,7 @@ const Sidebar = () => {
         </div>
       </div>
 
+      {/* User List */}
       <div className="overflow-y-auto w-full py-3">
         {filteredUsers.map((user) => (
           <button
@@ -53,6 +76,7 @@ const Sidebar = () => {
               ${selectedUser?._id === user._id ? "bg-base-300 ring-1 ring-base-300" : ""}
             `}
           >
+            {/* User Avatar */}
             <div className="relative mx-auto lg:mx-0">
               <img
                 src={user.profilePic || "/avatar.png"}
@@ -67,7 +91,7 @@ const Sidebar = () => {
               )}
             </div>
 
-            {/* User info - only visible on larger screens */}
+            {/* User Info (Visible on Larger Screens) */}
             <div className="hidden lg:block text-left min-w-0">
               <div className="font-medium truncate">{user.fullName}</div>
               <div className="text-sm text-zinc-400">
@@ -77,6 +101,7 @@ const Sidebar = () => {
           </button>
         ))}
 
+        {/* Message when no users match filter */}
         {filteredUsers.length === 0 && (
           <div className="text-center text-zinc-500 py-4">No online users</div>
         )}
@@ -84,4 +109,5 @@ const Sidebar = () => {
     </aside>
   );
 };
+
 export default Sidebar;

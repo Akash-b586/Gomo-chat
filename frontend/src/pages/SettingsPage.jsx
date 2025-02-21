@@ -2,11 +2,25 @@ import { THEMES } from "../constants";
 import { useThemeStore } from "../store/useThemeStore";
 import { Send } from "lucide-react";
 
+// Mock messages for chat preview demonstration
 const PREVIEW_MESSAGES = [
   { id: 1, content: "Hey! How's it going?", isSent: false },
   { id: 2, content: "I'm doing great! Just working on some new features.", isSent: true },
 ];
 
+/**
+ * SettingsPage Component
+ * 
+ * Provides user configuration options for application settings including:
+ * - Theme selection with live preview
+ * - Chat interface preview demonstration
+ * 
+ * Features:
+ * - Visual theme swatch selector
+ * - Interactive theme switching
+ * - Mock chat interface showing theme application
+ * - Persistent theme storage integration
+ */
 const SettingsPage = () => {
   const { theme, setTheme } = useThemeStore();
 
@@ -17,7 +31,9 @@ const SettingsPage = () => {
           <h2 className="text-lg font-semibold">Theme</h2>
           <p className="text-sm text-base-content/70">Choose a theme for your chat interface</p>
         </div>
+          <h2 className="text-lg font-semibold">Theme</h2>
 
+        {/* Theme Swatch Grid */}
         <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
           {THEMES.map((t) => (
             <button
@@ -28,6 +44,8 @@ const SettingsPage = () => {
               `}
               onClick={() => setTheme(t)}
             >
+
+              {/* Theme Color Preview */}
               <div className="relative h-8 w-full rounded-md overflow-hidden" data-theme={t}>
                 <div className="absolute inset-0 grid grid-cols-4 gap-px p-1">
                   <div className="rounded bg-primary"></div>
@@ -43,7 +61,7 @@ const SettingsPage = () => {
           ))}
         </div>
 
-        {/* Preview Section */}
+        {/* Live Preview Section */}
         <h3 className="text-lg font-semibold mb-3">Preview</h3>
         <div className="rounded-xl border border-base-300 overflow-hidden bg-base-100 shadow-lg">
           <div className="p-4 bg-base-200">
@@ -63,7 +81,7 @@ const SettingsPage = () => {
                   </div>
                 </div>
 
-                {/* Chat Messages */}
+                {/* Chat Messages Preview */}
                 <div className="p-4 space-y-4 min-h-[200px] max-h-[200px] overflow-y-auto bg-base-100">
                   {PREVIEW_MESSAGES.map((message) => (
                     <div
@@ -77,6 +95,7 @@ const SettingsPage = () => {
                         `}
                       >
                         <p className="text-sm">{message.content}</p>
+                        {/* Message timestamp */}
                         <p
                           className={`
                             text-[10px] mt-1.5
@@ -90,7 +109,7 @@ const SettingsPage = () => {
                   ))}
                 </div>
 
-                {/* Chat Input */}
+                {/* Chat Input Preview*/}
                 <div className="p-4 border-t border-base-300 bg-base-100">
                   <div className="flex gap-2">
                     <input
