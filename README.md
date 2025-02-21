@@ -1,1 +1,1 @@
-# Gomo-chat
+ALX MERN Stack Chat app
