@@ -5,16 +5,20 @@ import { Send } from "lucide-react";
 // Mock messages for chat preview demonstration
 const PREVIEW_MESSAGES = [
   { id: 1, content: "Hey! How's it going?", isSent: false },
-  { id: 2, content: "I'm doing great! Just working on some new features.", isSent: true },
+  {
+    id: 2,
+    content: "I'm doing great! Just working on some new features.",
+    isSent: true,
+  },
 ];
 
 /**
  * SettingsPage Component
- * 
+ *
  * Provides user configuration options for application settings including:
  * - Theme selection with live preview
  * - Chat interface preview demonstration
- * 
+ *
  * Features:
  * - Visual theme swatch selector
  * - Interactive theme switching
@@ -29,9 +33,11 @@ const SettingsPage = () => {
       <div className="space-y-6">
         <div className="flex flex-col gap-1">
           <h2 className="text-lg font-semibold">Theme</h2>
-          <p className="text-sm text-base-content/70">Choose a theme for your chat interface</p>
+          <p className="text-sm text-base-content/70">
+            Choose a theme for your chat interface
+          </p>
         </div>
-          <h2 className="text-lg font-semibold">Theme</h2>
+        <h2 className="text-lg font-semibold">Theme</h2>
 
         {/* Theme Swatch Grid */}
         <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
@@ -44,16 +50,14 @@ const SettingsPage = () => {
               `}
               onClick={() => setTheme(t)}
             >
-
               {/* Theme Color Preview */}
               <div className="relative h-8 w-full rounded-md overflow-hidden" data-theme={t}>
                 <div className="absolute inset-0 grid grid-cols-4 gap-px p-1">
-                  <div className="rounded bg-primary"></div>
-                  <div className="rounded bg-secondary"></div>
-                  <div className="rounded bg-accent"></div>
-                  <div className="rounded bg-neutral"></div>
+                         {/* dark and light theme */}
                 </div>
               </div>
+              
+
               <span className="text-[11px] font-medium truncate w-full text-center">
                 {t.charAt(0).toUpperCase() + t.slice(1)}
               </span>
@@ -75,7 +79,7 @@ const SettingsPage = () => {
                       J
                     </div>
                     <div>
-                      <h3 className="font-medium text-sm">John Doe</h3>
+                      <h3 className="font-medium text-sm">Akash</h3>
                       <p className="text-xs text-base-content/70">Online</p>
                     </div>
                   </div>
@@ -86,12 +90,18 @@ const SettingsPage = () => {
                   {PREVIEW_MESSAGES.map((message) => (
                     <div
                       key={message.id}
-                      className={`flex ${message.isSent ? "justify-end" : "justify-start"}`}
+                      className={`flex ${
+                        message.isSent ? "justify-end" : "justify-start"
+                      }`}
                     >
                       <div
                         className={`
                           max-w-[80%] rounded-xl p-3 shadow-sm
-                          ${message.isSent ? "bg-primary text-primary-content" : "bg-base-200"}
+                          ${
+                            message.isSent
+                              ? "bg-primary text-primary-content"
+                              : "bg-base-200"
+                          }
                         `}
                       >
                         <p className="text-sm">{message.content}</p>
@@ -99,7 +109,11 @@ const SettingsPage = () => {
                         <p
                           className={`
                             text-[10px] mt-1.5
-                            ${message.isSent ? "text-primary-content/70" : "text-base-content/70"}
+                            ${
+                              message.isSent
+                                ? "text-primary-content/70"
+                                : "text-base-content/70"
+                            }
                           `}
                         >
                           12:00 PM

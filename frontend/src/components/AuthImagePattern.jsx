@@ -19,15 +19,12 @@ const AuthImagePattern = ({ title, subtitle }) => {
     <div className="hidden lg:flex items-center justify-center bg-base-200 p-12">
       <div className="max-w-md text-center">
         {/* Image grid with 9 boxes */}
-        <div className="grid grid-cols-3 gap-3 mb-8">
-          {[...Array(9)].map((_, i) => (
-            <div
-              key={i}
-              className={`aspect-square rounded-2xl bg-primary/10 ${
-                i % 2 === 0 ? "animate-pulse" : ""
-              }`}
-            />
-          ))}
+        <div className="mb-8">
+          <img
+            src="/image.jpg" 
+            alt="Displayed Image"
+            className="w-full rounded-2xl object-cover"
+          />
         </div>
 
         {/* Title and Subtitle */}
