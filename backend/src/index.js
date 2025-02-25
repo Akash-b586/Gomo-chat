@@ -20,11 +20,10 @@ app.use(cookieParser());
 
 // Dynamic CORS configuration based on environment
 const corsOptions = {
-  origin: process.env.NODE_ENV === "production" 
-    ? ["https://gomo-chat.vercel.app"] 
-    : ["http://localhost:5173"],
+  origin: ["https://gomo-chat.vercel.app", "http://localhost:5173"],
   credentials: true,
 };
+
 
 
 app.use(cors(corsOptions));
