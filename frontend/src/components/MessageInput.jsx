@@ -3,27 +3,12 @@ import { useChatStore } from "../store/useChatStore";
 import { Image, Send, X } from "lucide-react";
 import toast from "react-hot-toast";
 
-/**
- * MessageInput Component
- * 
- * Allows users to type messages, attach images, and send messages.
- * 
- * Features:
- * - Text input for messages
- * - Image upload with preview and removal
- * - Send button (disabled when no message or image is selected)
- */
 const MessageInput = () => {
-  const [text, setText] = useState(""); // Stores message text
-  const [imagePreview, setImagePreview] = useState(null); // Stores image preview URL
-  const fileInputRef = useRef(null); // Ref for hidden file input
-  const { sendMessage } = useChatStore(); // Access chat store
+  const [text, setText] = useState(""); 
+  const [imagePreview, setImagePreview] = useState(null); 
+  const fileInputRef = useRef(null); 
+  const { sendMessage } = useChatStore(); 
 
-  /**
-   * Handles image selection from file input.
-   * 
-   * @param {Event} e - File input change event
-   */
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -40,19 +25,11 @@ const MessageInput = () => {
     reader.readAsDataURL(file);
   };
 
-  /**
-   * Removes the selected image.
-   */
   const removeImage = () => {
     setImagePreview(null);
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
-  /**
-   * Handles sending a message.
-   * 
-   * @param {Event} e - Form submit event
-   */
   const handleSendMessage = async (e) => {
     e.preventDefault();
     if (!text.trim() && !imagePreview) return;

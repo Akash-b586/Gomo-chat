@@ -2,18 +2,8 @@ import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore";
 import { LogOut, MSquareIcon, Settings, User } from "lucide-react";
 
-/**
- * Navbar Component
- * 
- * Displays the main navigation bar, including:
- * - A logo linking to the homepage
- * - Navigation links to settings and profile
- * - Logout button (only visible if a user is authenticated)
- *
- * @component
- */
 const Navbar = () => {
-  const { logout, authUser } = useAuthStore(); // Access authentication state and logout function
+  const { logout, authUser } = useAuthStore(); 
 
   return (
     <header

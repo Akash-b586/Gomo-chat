@@ -1,20 +1,5 @@
 import { MSquareIcon } from "lucide-react";
 
-/**
- * NoChatSelected Component
- *
- * This component renders a placeholder message when no chat is selected.
- * It provides a welcoming message and guides the user to select a conversation.
- *
- * Features:
- * - Displays an animated chat icon for a friendly UI.
- * - Includes a title and instructional text to inform the user.
- * - Uses Tailwind CSS for styling and layout responsiveness.
- *
- * Usage:
- * - Displayed when no chat is selected from the sidebar.
- * - Helps improve user experience by preventing an empty screen.
- */
 const NoChatSelected = () => {
   return (
     <div className="w-full flex flex-1 flex-col items-center justify-center p-16 bg-base-100/50">
@@ -31,10 +16,8 @@ const NoChatSelected = () => {
           </div>
         </div>
 
-        {/* Welcome Message */}
         <h2 className="text-2xl font-bold">Welcome to GomoChat!</h2>
         
-        {/* Instructional Text */}
         <p className="text-base-content/60">
           Select a conversation from the sidebar to start chatting.
         </p>

@@ -6,20 +6,6 @@ import MessageSkeleton from "./skeletons/MessageSkeleton";
 import { useAuthStore } from "../store/useAuthStore";
 import { formatMessageTime } from "../lib/utils";
 
-/**
- * ChatContainer Component
- * 
- * Handles the display of a chat interface between the authenticated user and a selected user.
- * Features include:
- * - Real-time message fetching/subscriptions
- * - Auto-scroll to newest message
- * - Message bubbles with avatars and timestamps
- * - Image/text message support
- * 
- * @component
- * @example
- * return <ChatContainer />
- */
 const ChatContainer = () => {
   // Zustand Store Hooks
   const {
@@ -37,13 +23,14 @@ const ChatContainer = () => {
 
   // Fetch messages and subscribe to real-time updates
   useEffect(() => {
-    // Fetch historical messages for the selected user
     getMessages(selectedUser._id);
-
-    // Subscribe to new messages
+    while(isMessagesLoading){}
+    messages.map((message) => {
+      console.log(message.senderId)
+      console.log(authUser._id)   
+    })
     subscribeToMessages();
-
-    // Cleanup: Unsubscribe when component unmounts or selectedUser changes
+    
     return () => unsubscribeFromMessages();
   }, [selectedUser._id, getMessages, subscribeToMessages, unsubscribeFromMessages]);
 
@@ -72,9 +59,11 @@ const ChatContainer = () => {
       {/* Messages Container */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.map((message) => (
+      
           <div
             key={message._id}
-            className={`chat ${message.senderId === authUser._id ? "chat-end" : "chat-start"}`}
+            className={message.senderId._id === authUser._id ? "chat-end" : "chat-start" }
+            
             ref={messageEndRef}
           >
             {/* User Avatar */}

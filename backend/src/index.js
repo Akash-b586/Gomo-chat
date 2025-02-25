@@ -11,7 +11,7 @@ import { app, server } from "./lib/socket.js";
 
 dotenv.config();
 
-const PORT = process.env.PORT || 5000;  // Provide a fallback port
+const PORT = process.env.PORT || 5000;  
 const __dirname = path.resolve();
 
 // Middleware

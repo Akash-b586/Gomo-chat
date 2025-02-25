@@ -1,15 +1,12 @@
 // socket.js
 
-// Import necessary modules
 import { Server } from "socket.io";
 import http from "http";
 import express from "express";
 
-// Initialize the Express app and HTTP server
 const app = express();
 const server = http.createServer(app);
 
-// Initialize the Socket.IO server with CORS configuration
 const io = new Server(server, {
   cors: {
     origin: ["http://localhost:5173"], // Allowed origins for cross-origin requests
@@ -19,12 +16,7 @@ const io = new Server(server, {
 // Used to store the mapping of user IDs to their respective socket IDs
 const userSocketMap = {}; // Format: { userId: socketId }
 
-/**
- * Retrieves the socket ID of a user by their user ID.
- * 
- * @param {string} userId - The ID of the user.
- * @returns {string | undefined} - The socket ID associated with the user, or undefined if the user is not online.
- */
+
 export function getReceiverSocketId(userId) {
   return userSocketMap[userId];
 }
@@ -54,5 +46,4 @@ io.on("connection", (socket) => {
   });
 });
 
-// Export the io instance, Express app, and server for use in other modules
 export { io, app, server };

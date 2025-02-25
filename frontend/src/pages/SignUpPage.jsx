@@ -6,20 +6,7 @@ import { Link } from "react-router-dom";
 import AuthImagePattern from "../components/AuthImagePattern";
 import toast from "react-hot-toast";
 
-/**
- * SignUpPage Component
- * 
- * Handles user registration with form validation and authentication integration.
- * Features:
- * - Full name, email, and password inputs
- * - Password visibility toggle
- * - Real-time form validation
- * - Loading states during submission
- * - Error handling with toast notifications
- * - Redirection to login page
- */
 const SignUpPage = () => {
-  // State management
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
@@ -30,10 +17,6 @@ const SignUpPage = () => {
   // Authentication store integration
   const { signup, isSigningUp } = useAuthStore();
 
-  /**
-   * Validates form inputs with client-side checks
-   * @returns {boolean} True if validation passes
-   */
   const validateForm = () => {
     if (!formData.fullName.trim()) return toast.error("Full name is required");
     if (!formData.email.trim()) return toast.error("Email is required");
@@ -44,10 +27,6 @@ const SignUpPage = () => {
     return true;
   };
 
-  /**
-   * Handles form submission
-   * @param {React.FormEvent} e - Form event
-   */
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -58,10 +37,8 @@ const SignUpPage = () => {
 
   return (
     <div className="min-h-screen grid lg:grid-cols-2">
-      {/* Registration Form Section */}
       <div className="flex flex-col justify-center items-center p-6 sm:p-12">
         <div className="w-full max-w-md space-y-8">
-          {/* Branding Header */}
           <div className="text-center mb-8">
             <div className="flex flex-col items-center gap-2 group">
               <div
@@ -75,9 +52,7 @@ const SignUpPage = () => {
             </div>
           </div>
 
-          {/* Registration Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Full Name Input */}            
             <div className="form-control">
               <label className="label">
                 <span className="label-text font-medium">Full Name</span>
@@ -96,7 +71,6 @@ const SignUpPage = () => {
               </div>
             </div>
 
-            {/* Email Input */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text font-medium">Email</span>
@@ -115,7 +89,6 @@ const SignUpPage = () => {
               </div>
             </div>
 
-            {/* Password Input */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text font-medium">Password</span>

@@ -39,7 +39,6 @@ const SettingsPage = () => {
         </div>
         <h2 className="text-lg font-semibold">Theme</h2>
 
-        {/* Theme Swatch Grid */}
         <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
           {THEMES.map((t) => (
             <button
@@ -50,10 +49,8 @@ const SettingsPage = () => {
               `}
               onClick={() => setTheme(t)}
             >
-              {/* Theme Color Preview */}
               <div className="relative h-8 w-full rounded-md overflow-hidden" data-theme={t}>
                 <div className="absolute inset-0 grid grid-cols-4 gap-px p-1">
-                         {/* dark and light theme */}
                 </div>
               </div>
               
@@ -65,14 +62,11 @@ const SettingsPage = () => {
           ))}
         </div>
 
-        {/* Live Preview Section */}
         <h3 className="text-lg font-semibold mb-3">Preview</h3>
         <div className="rounded-xl border border-base-300 overflow-hidden bg-base-100 shadow-lg">
           <div className="p-4 bg-base-200">
             <div className="max-w-lg mx-auto">
-              {/* Mock Chat UI */}
               <div className="bg-base-100 rounded-xl shadow-sm overflow-hidden">
-                {/* Chat Header */}
                 <div className="px-4 py-3 border-b border-base-300 bg-base-100">
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-content font-medium">
@@ -85,7 +79,6 @@ const SettingsPage = () => {
                   </div>
                 </div>
 
-                {/* Chat Messages Preview */}
                 <div className="p-4 space-y-4 min-h-[200px] max-h-[200px] overflow-y-auto bg-base-100">
                   {PREVIEW_MESSAGES.map((message) => (
                     <div
@@ -105,7 +98,6 @@ const SettingsPage = () => {
                         `}
                       >
                         <p className="text-sm">{message.content}</p>
-                        {/* Message timestamp */}
                         <p
                           className={`
                             text-[10px] mt-1.5
@@ -123,7 +115,6 @@ const SettingsPage = () => {
                   ))}
                 </div>
 
-                {/* Chat Input Preview*/}
                 <div className="p-4 border-t border-base-300 bg-base-100">
                   <div className="flex gap-2">
                     <input

@@ -85,7 +85,6 @@ export const sendMessage = async (req, res) => {
       io.to(receiverSocketId).emit("newMessage", newMessage);
     } else {
       console.log(`Receiver with ID ${receiverId} is not online`);
-      // Optionally handle case where receiver is offline (e.g., store notification in DB or queue)
     }
 
     // Respond with the new message

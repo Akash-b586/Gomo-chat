@@ -2,17 +2,10 @@ import { X } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
 import { useChatStore } from "../store/useChatStore";
 
-/**
- * ChatHeader Component
- * 
- * Displays the selected chat user's avatar, name, and online status.
- * Includes a close button to deselect the user.
- */
 const ChatHeader = () => {
   const { selectedUser, setSelectedUser } = useChatStore();
   const { onlineUsers } = useAuthStore();
 
-  // Handle case where no user is selected
   if (!selectedUser) return null;
 
   return (

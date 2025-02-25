@@ -20,14 +20,13 @@ const App = () => {
   const { authUser, checkAuth, isCheckingAuth, onlineUsers } = useAuthStore();
   const { theme } = useThemeStore();
 
-  console.log({ onlineUsers }); // Log online users for debugging (can be removed in production)
+  console.log({ onlineUsers });
 
-  // Check if the user is authenticated on component mount
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
 
-  console.log({ authUser }); // Log authenticated user (can be removed in production)
+  console.log({ authUser });
 
   // Show loading spinner while checking authentication state
   if (isCheckingAuth && !authUser)
@@ -39,28 +38,32 @@ const App = () => {
 
   return (
     <div data-theme={theme}>
-      {/* Navbar is displayed on every page */}
       <Navbar />
 
-      {/* Set up routing for different pages */}
       <Routes>
-        {/* HomePage - accessible if the user is authenticated */}
-        <Route path="/" element={authUser ? <HomePage /> : <Navigate to="/login" />} />
+        <Route
+          path="/"
+          element={authUser ? <HomePage /> : <Navigate to="/login" />}
+        />
 
-        {/* SignUpPage - accessible only if the user is not authenticated */}
-        <Route path="/signup" element={!authUser ? <SignUpPage /> : <Navigate to="/" />} />
+        <Route
+          path="/signup"
+          element={!authUser ? <SignUpPage /> : <Navigate to="/" />}
+        />
 
-        {/* LoginPage - accessible only if the user is not authenticated */}
-        <Route path="/login" element={!authUser ? <LoginPage /> : <Navigate to="/" />} />
+        <Route
+          path="/login"
+          element={!authUser ? <LoginPage /> : <Navigate to="/" />}
+        />
 
-        {/* SettingsPage - accessible by all users */}
         <Route path="/settings" element={<SettingsPage />} />
 
-        {/* ProfilePage - accessible only if the user is authenticated */}
-        <Route path="/profile" element={authUser ? <ProfilePage /> : <Navigate to="/login" />} />
+        <Route
+          path="/profile"
+          element={authUser ? <ProfilePage /> : <Navigate to="/login" />}
+        />
       </Routes>
 
-      {/* Toast notifications for user feedback */}
       <Toaster />
     </div>
   );
