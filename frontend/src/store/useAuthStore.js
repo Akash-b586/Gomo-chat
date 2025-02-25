@@ -94,12 +94,14 @@ export const useAuthStore = create((set, get) => ({
   connectSocket: () => {
     const { authUser } = get();
     if (!authUser || get().socket?.connected) return;  // Prevent reconnecting if already connected
-
     const socket = io(BASE_URL, {
+      transports: ["websocket"], // Force WebSocket transport
+      withCredentials: true, // Ensures cookies are sent (if needed)
       query: {
         userId: authUser._id,
       },
     });
+    
     socket.connect();
 
     set({ socket });

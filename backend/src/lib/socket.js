@@ -8,7 +8,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: ["https://gomo-chat.vercel.app", "http://localhost:5173"],
+    origin: ["https://gomo-chat.vercel.app", "http://localhost:5173", "https://frontend-evudrav23-akashs-projects-baa94e3c.vercel.app"],
     credentials: true,
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type", "Authorization"],
